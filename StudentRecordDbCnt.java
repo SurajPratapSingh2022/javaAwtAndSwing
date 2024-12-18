@@ -17,11 +17,11 @@ import javax.swing.JTextField;
 
 class StudentRecord extends JFrame{
 	JFrame f1;
-	JLabel name,rollno,gender,semester,fee;
-	JTextField tname,troll,tsem,ffee;
+	JLabel name,rollno,gender,semester,fee,ssid;
+	JTextField tname,troll,tsem,ffee,tscrch;
 	JRadioButton r1,r2;
 	ButtonGroup buttongroup;
-	JButton btnsave;
+	JButton btnsave,btndelete;
 	StudentRecord(){
 		f1=new JFrame("Student Record");
 		f1.setSize(600,400);
@@ -102,7 +102,7 @@ class StudentRecord extends JFrame{
 				    Class.forName("com.mysql.cj.jdbc.Driver");
 				    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spsdb", "root", "system");
 				    stmt = con.createStatement();
-				    stmt.execute("insert into student(name, rollno, gender, sem, fee) values('" + n + "', " + roll + ", '" + gender + "', '" + sem + "', " + fee + ")");
+				    stmt.execute("insert into student(name, rollno, gender, sem, fee) values('" +n+ "', " +roll+ ", '" +gender+ "', '" +sem+ "', " +fee+ ")");//use single cot for string enclosed
 				    JOptionPane.showMessageDialog(null, "Save student details successfully");
 				    tname.setText("");
 				    troll.setText("");
@@ -111,7 +111,45 @@ class StudentRecord extends JFrame{
 				} catch (Exception ex) {
 				    JOptionPane.showMessageDialog(null, ex.toString());
 				}
-
+			}
+		});
+		
+		//for searching student using textfield & then delete it by using a button from student record on the basis of student id 
+		ssid=new JLabel("Enter Student id");
+		ssid.setBounds(20,200,100,20);
+		f1.add(ssid);
+		
+		tscrch=new JTextField(10);
+		tscrch.setBounds(20,220,100,20);
+		f1.add(tscrch);
+		
+		btndelete=new JButton("Delete");
+		btndelete.setBounds(150,220,100,20);
+		f1.add(btndelete);
+		
+		btndelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int sid=Integer.parseInt(tscrch.getText());
+				Connection con = null; // Declare Connection outside the try block
+				try {
+				    Statement stmt;
+				    Class.forName("com.mysql.cj.jdbc.Driver");
+				    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spsdb", "root", "system");
+				    stmt = con.createStatement();
+				    stmt.execute("delete from student where sid="+sid+" ");
+				    JOptionPane.showMessageDialog(null, "Delete Record Successfully");
+				    tscrch.setText("");
+				} catch (Exception ex) {
+				    JOptionPane.showMessageDialog(null, ex.toString());
+				} finally {
+				    try {
+				        if (con != null) {
+				            con.close(); 
+				        }
+				    } catch (Exception ex) {
+				        JOptionPane.showMessageDialog(null, "Error closing connection: " + ex.toString());
+				    }
+				}
 			}
 		});
 	}
