@@ -130,7 +130,7 @@ class StudentRecord extends JFrame{
 		btndelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int sid=Integer.parseInt(tscrch.getText());
-				Connection con = null; // Declare Connection outside the try block
+				Connection con = null; 
 				try {
 				    Statement stmt;
 				    Class.forName("com.mysql.cj.jdbc.Driver");
