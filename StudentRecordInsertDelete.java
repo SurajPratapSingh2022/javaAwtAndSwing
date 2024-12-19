@@ -154,7 +154,7 @@ class StudentRecord extends JFrame{
 		});
 	}
 }
-public class StudentRecordDbCnt{
+public class StudentRecordInsertDelete{
 	public static void main(String[] args) {
 		new StudentRecord();
 	}
