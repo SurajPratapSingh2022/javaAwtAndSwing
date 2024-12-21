@@ -25,8 +25,8 @@ class Myapp {
 				String[][] data = new String[10][6];
 				String[] columns = { "S.ID", "NAME", "GENDER", "ROLL", "SEM", "FEE" };
 				final String URL = "jdbc:mysql://srv1332.hstgr.io:3306/u398667489_college";
-				final String USER = "u398667489_college";
-				final String PASS = "ashish00@K";
+				final String USER = "👨‍💼";
+				final String PASS = "🔒";
 				try {
 					Connection con;
 					Statement stm;
